@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+
+
+
+{% block content %}
+<div class=grid-12>
+<h2>Show container inspect {{ detail['Name'] }}</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{ detail['Name'] }}</dd>
+        <dt>Created</dt>
+        <dd>{{ detail['Created'] }}</dd>
+        <dt>State</dt>
+        <dd>{{ detail['State'] }}</dd>
+        <dt>Image</dt>
+	<dd>{{ detail['Config']['Image'] }}</dd>
+        <dt>ExposedPorts</dt>
+	<dd>{{ detail['Config']['ExposedPorts'] }}</dd>
+        <dt>Cmd</dt>
+        <dd>{{ detail['Config']['Cmd'] }}</dd>
+        <dt>Volumes</dt>
+        <dd>{{ detail['Volumes'] }}</dd>
+    </dl>
+
+<h2>Action</h2>
+{% if detail['State']['Running'] == False %}
+    <form action="{{ url_for('startContainer') }}" method="post">
+        <input type="hidden" name="Name" value="{{ detail['Name'] }}" />
+	<input type="submit" value="Start" />
+    </form>
+    <br />
+    <form action="{{ url_for('destroy') }}" method="post">
+        <input type="hidden" name="Name" value="{{ detail['Name'] }}" />
+	<input type="submit" value="Destroy" />
+    </form>
+    <p>現状 Destroy してもコードのクリーニング、nginx の設定の削除まではやっていません。</p>
+{% else %}
+    <form action="{{ url_for('terminateContainer') }}" method="post">
+	<input type="hidden" name="Name" value="{{ detail['Name'] }}" />
+	<input type="submit" value="Stop" />
+    </form>
+{% endif %}
+<br />
+</div>
+
+{% endblock %}
+
+

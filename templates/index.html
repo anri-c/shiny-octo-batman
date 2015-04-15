@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+
+
+{% block content %}
+<div class=grid-12>
+<h1>Host Status {{ base_info['Name'] }}</h1>
+<h2>Container Count {{ base_info['Containers'] }} </h2>
+<dl>
+<dt>Host OS</dt>
+<dd>{{ base_info['OperatingSystem'] }}</dd>
+<dt>Kernel Version</dt>
+<dd>{{ base_info['KernelVersion'] }}</dd>
+<dt>Docker Root Dir</dt>
+<dd>{{ base_info['DockerRootDir'] }}</dd>
+<dt>Data Space Total</dt>
+<dd>{{ base_info['DriverStatus'][6][1] }}</dd>
+<dt>Data Space Used</dt>
+<dd>{{ base_info['DriverStatus'][5][1] }}</dd>
+<dt>Cpus</dt>
+<dd>{{ base_info['NCPU'] }}</dd>
+<dt>Mem Total</dt>
+<dd>{{ base_info['MemTotal'] }}</dd>
+</dl>
+</div>
+{% endblock %}

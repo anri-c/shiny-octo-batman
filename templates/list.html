@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+
+
+
+{% block content %}
+<div class=grid-12>
+<h2>Show all containers.</h2>
+{% for item in list %}
+	<dl>
+	<dt>Container Name</dt>
+	<dd><a href="/container/{{ item['name'] }}">{{ item['name'] }}</a></dd>
+	<dt>Status</dt>
+	<dd>{{ item['status'] }}</dd>
+	<dt>Image</dt>
+	<dd>{{ item['image'] }}</dd>
+	</dl>
+{% endfor %}
+
+</div>
+
+{% endblock %}
